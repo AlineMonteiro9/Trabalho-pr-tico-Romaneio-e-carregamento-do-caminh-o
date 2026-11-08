@@ -1,0 +1,119 @@
+//Constantes
+const CAP = 5;
+const fila = [];  
+const pilha = [];
+
+//Fila do romaneio
+function enfileirar(valor) 
+{ 
+  if (fila.length === CAP)
+  {
+    console.log("> Fila do romaneio cheia :( "); 
+  } 
+  else
+  {
+    fila.push(valor);
+    console.log(`> Pacote "${valor}" inserido no romaneio com sucesso!`);
+  }  
+}
+
+
+//Retirar da fila
+function Tirar() 
+{ 
+  if (fila.length === 0)
+  {
+    console.log("> Fila do romaneio vazia! Não foi possivel inserir o pacote!");
+    return;
+  }
+  if (pilha.length === CAP) 
+  {
+    console.log("> Caminhão lotado! Não foi possivel inserir o pacote!");
+    return;
+  }
+
+  //Tira da fila e empilha
+  const PR = fila.shift(); 
+  pilha.push(PR);
+  console.log(`> Pacote "${PR}" foi retirado da fila e carregado no caminhão.`);
+
+}
+
+
+//Tira os trem do caminhão
+function Desempilhar() 
+{ 
+  if (pilha.length === 0) 
+  { 
+    console.log("Caminhão vazio! Nenhum pacote para retirar.");
+  } 
+  else 
+  { 
+    const removido = pilha.pop();
+    console.log(`> Pacote "${removido}" foi retirado do caminhão.`);
+  }
+}
+
+//Mostrar Romaneio e caminhão
+function Mostrar()
+{
+  console.log("-> Pacotes na fila do romaneio:",fila);
+  console.log("-> Pacotes dentro do caminhão:",pilha);
+}
+
+
+//Menu
+function Menu(lista)
+{
+  while(true)
+  {
+    const op = prompt
+      (
+        "\n||        MENU PRINCIPAL         ||\n"+
+        "| Escolha uma opção de entrada    |\n"+
+        "| [1] Incluir pacote no romaneio  |\n"+
+        "| [2] Retirar da fila e carregar  |\n"+
+        "| [3] Retirar pacote do caminhão  |\n"+
+        "| [4] Mostrar romaneio e caminhão |\n"+
+        "| [0] Encerrar                    |\n"+
+        "-> "
+      );
+    if (op === null || op.trim()=== "0")
+    {
+      return;
+    }
+  
+  switch (op.trim()) {
+      case "1":
+      {
+        const pacote = prompt("-> Insira o nome do pacote que deseja adicionar à fila do romaneio:");
+        if (pacote === null || pacote.trim() === "") {
+          console.log(" > Nome inválido... tente novamente!");
+        } 
+        else 
+        {
+          enfileirar(pacote.trim());
+        }
+        break;
+      }
+      case "2":
+      {
+        Tirar();
+        break;
+      }
+      case "3":
+      {
+        Desempilhar();
+        break;
+      }
+      case "4":
+      {
+        Mostrar();
+        break;
+      }
+      default:
+        console.log(" > Opção inválida...Tente novamente!");
+    }
+  }
+}
+Menu();
